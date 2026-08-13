@@ -1,0 +1,126 @@
+{
+  "_description": "Configuration generale du pipeline LIMS -> REDCap (v1.0, Prompt 1). Aucune donnee metier ne doit etre codee en dur dans le code Python : elle est placee ici.",
+
+  "sheet_name": "Résultats des Analyse",
+  "sheet_name_fallback_contains": "resultat",
+
+  "header_detection": {
+    "_comment": "Lignes d'en-tete detectees automatiquement. On identifie la ligne des NOMS de champ comme celle contenant le plus de champs d'ancrage ci-dessous ; la ligne des CODES/groupes est celle juste au-dessus.",
+    "anchor_fields": [
+      "ID de Participant",
+      "N° de Visite",
+      "Sexe",
+      "Essai Clinique",
+      "Laboratoire"
+    ],
+    "max_header_scan_rows": 20,
+    "min_anchor_matches": 2
+  },
+
+  "data_rows": {
+    "_comment": "identity_column_1based : colonne (1-based) utilisee pour le comptage grossier lors de la detection des en-tetes. identity_field : champ metier dont la presence definit une VRAIE ligne de donnees (participant renseigne) ; resolu par identite, il exclut le bloc de legende meme si celui-ci remplit la 1re colonne.",
+    "identity_column_1based": 1,
+    "identity_field": "ID de Participant"
+  },
+
+  "column_identity": {
+    "_comment": "Identite metier d'une colonne = section + champ + occurrence. Les codes ci-dessous marquent le DEBUT d'une section d'echantillon (bloc MDFT). Toutes les colonnes suivant un tel code lui sont rattachees jusqu'au code de section suivant. Pour la zone administrative (colonnes 1..~63), la 'section' est la banniere fusionnee de la ligne des codes (report automatique). Aucune identification par position.",
+    "section_start_codes": [
+      "MDFT-SAL0",
+      "MDFT-SAL3",
+      "MDFT-SAL4",
+      "MDFT-SEL",
+      "MDFT-PL",
+      "MDFT-AUTR",
+      "MDFT-SAMP"
+    ]
+  },
+
+  "archive": {
+    "_comment": "Chaque execution copie le fichier original (jamais modifie) dans archive/<date>/raw/. La date est celle de l'execution (YYYY-MM-DD).",
+    "date_format": "%Y-%m-%d",
+    "subdirs": ["raw", "output", "qc", "logs"]
+  },
+
+  "mapping": {
+    "_comment": "Fichiers de mapping externalises (Prompt 4). L'association LIMS -> REDCap passe par l'identite metier (source_group|source_field|source_occurrence), jamais par la position. technical_variables = variables generees (pas de colonne source).",
+    "lims_redcap_mapping": "config/lims_redcap_mapping.csv",
+    "sites_mapping": "config/sites_mapping.csv",
+    "sex_mapping": "config/sex_mapping.csv",
+    "visits_mapping": "config/visits_mapping.csv",
+    "redcap_output_columns": "config/redcap_output_columns.csv",
+    "allowed_data_types": ["text", "categorical", "integer", "date", "time", "event"],
+    "technical_variables": [
+      "patid",
+      "redcap_repeat_instrument",
+      "redcap_repeat_instance",
+      "redcap_data_access_group",
+      "lims_tab_id"
+    ]
+  },
+
+  "transform": {
+    "_comment": "Reproduction des transformations Stata. patid_variable : la variable dont patid est une copie. value_recodes : recodages par table (site, sexe). event_recodes : N° de Visite -> event via visits. deferred_variables : calculees plus tard (repeat_instance -> Prompt 7). Une valeur SOURCE vide reste vide (comme Stata) sans erreur ; une valeur NON vide non reconnue declenche le code d'erreur/avertissement configure.",
+    "patid_variable": "lims_id_participant",
+    "constants": {
+      "lims_tab_id": "LIMS",
+      "redcap_data_access_group": "",
+      "redcap_repeat_instrument": "labo_prlvements_biologiques_sousetude_mdf_lims"
+    },
+    "value_recodes": {
+      "lims_site1": {"map": "sites", "severity": "ERROR", "error_code": "ERROR_UNKNOWN_SITE"},
+      "lims_sexe": {"map": "sex", "severity": "WARNING", "error_code": "WARNING_UNKNOWN_SEX"}
+    },
+    "event_recodes": {
+      "redcap_event_name": {"map": "visits", "severity": "ERROR", "error_code": "ERROR_UNKNOWN_VISIT"}
+    },
+    "deferred_variables": ["redcap_repeat_instance"],
+
+    "date_output_format": "%d/%m/%Y",
+    "time_output_format": "%H:%M",
+    "date_invalid": {"severity": "ERROR", "error_code": "ERROR_INVALID_DATE"},
+    "time_invalid": {"severity": "WARNING", "error_code": "ERROR_INVALID_TIME"},
+    "repeat_instance": {
+      "_comment": "Reproduit : bys patid redcap_event_name (lims_date_reu_en_lab): gen = _n. Tri CHRONOLOGIQUE (date reparsee), date manquante en dernier (comme Stata). Egalites departagees par l'ordre d'apparition (deterministe).",
+      "field": "redcap_repeat_instance",
+      "group_by": ["patid", "redcap_event_name"],
+      "sort_by": "lims_date_reu_en_lab",
+      "multiple_warning": {"severity": "WARNING", "error_code": "WARNING_MULTIPLE_RECORDS_SAME_EVENT"}
+    },
+    "french_months": {
+      "janv": 1, "janvier": 1, "fevr": 2, "fevrier": 2, "mars": 3, "avr": 4, "avril": 4,
+      "mai": 5, "juin": 6, "juil": 7, "juillet": 7, "aout": 8, "sept": 9, "septembre": 9,
+      "oct": 10, "octobre": 10, "nov": 11, "novembre": 11, "dec": 12, "decembre": 12
+    }
+  },
+
+  "export": {
+    "_comment": "Format du fichier de sortie, aligne sur Ready_Data de reference : separateur ';', UTF-8 avec BOM, fins de ligne CRLF, aucune colonne technique interne. La date du nom de fichier est extraite du nom de l'extraction (jeton AA_MM_JJ) sinon la date d'execution. Si statut NOT_READY -> nom NOT_READY_Data_* (jamais Ready_Data).",
+    "delimiter": ";",
+    "encoding": "utf-8-sig",
+    "line_terminator": "\r\n",
+    "ready_filename": "Ready_Data_{date}.csv",
+    "not_ready_filename": "NOT_READY_Data_{date}.csv",
+    "qc_filename": "QC_Report_{date}.xlsx",
+    "run_date_format": "%y_%m_%d",
+    "dataset_date_pattern": "(\\d{2}_\\d{2}_\\d{2})"
+  },
+
+  "schema_guard": {
+    "_comment": "Controle de structure. reference_schema_path : signature de reference generee par build_reference_schema.py. Les champs obligatoires ci-dessous servent UNIQUEMENT a (re)generer la reference ; a l'execution, c'est le flag 'required' du reference_schema.json qui fait foi. Un champ obligatoire absent -> FAIL. Colonne deplacee -> warning (non bloquant). Nouvelle colonne -> warning.",
+    "reference_schema_path": "config/reference_schema.json",
+    "required_fields": [
+      "Laboratoire",
+      "Sites",
+      "EssaiClin",
+      "Essai Clinique",
+      "ID de Participant",
+      "N° de Visite",
+      "Âge en Jours",
+      "Sexe"
+    ],
+    "required_field_keys": [
+      {"group": "Reçu en Lab", "field": "Date"}
+    ]
+  }
+}

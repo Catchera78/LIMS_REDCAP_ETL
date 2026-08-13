@@ -1,0 +1,16 @@
+# Dependances du pipeline LIMS -> REDCap MDF (v1.0)
+# Installation : pip install -r requirements.txt
+# Verification : python run_pipeline.py --check
+#
+# IMPORTANT : le pipeline fonctionne SANS aucune dependance externe (lecture et
+# ecriture .xlsx en repli bibliotheque standard). openpyxl est neanmoins
+# RECOMMANDE sur le poste de production (plus robuste sur gros fichiers).
+
+# --- Recommande pour l'execution ---
+openpyxl>=3.1        # lecture/ecriture .xlsx (sinon repli stdlib)
+
+# --- Necessaire uniquement pour lancer la suite de tests ---
+pytest>=7.0
+
+# Note : pandas et python-dateutil, listes dans la specification, ne sont PAS
+# utilises par la v1.0 (traitement en stdlib + openpyxl). Non requis.

@@ -1,0 +1,46 @@
+﻿stata_source_position;lims_group_header;lims_field_header;stata_variable;redcap_variable;transformation;required;notes
+17;DéTAILS DU PARTICIPANT...;ID de Participant;patid;patid;copie de lims_id_participant (gen patid=lims_id_participant);YES;Cle metier participant
+;;;(constante);redcap_repeat_instrument;constante = labo_prlvements_biologiques_sousetude_mdf_lims;YES;gen constant
+19;DéTAILS DU PARTICIPANT...;N° de Visite;(intermediaire, droppe);redcap_event_name;"map N de Visite -> event via 16 regles gen/replace; valeur inconnue -> event VIDE (silencieux)";YES;v19 sert au mapping visite puis est droppe. Aucune detection de visite inconnue.
+;;;(calcule);redcap_repeat_instance;bys patid redcap_event_name (lims_date_reu_en_lab): gen =_n;YES;Numerotation 1..n apres gsort
+;;;(constante vide);redcap_data_access_group;"constante = """" (gen redcap_data_access_group="""")";NO;Toujours vide
+;;;(constante);lims_tab_id;constante = LIMS;YES;gen constant
+1;Num de;Laboratoire;lims_laboratoire;lims_laboratoire;rename direct (valeur copiee telle quelle);YES;
+5;CODES POUR...;Sites;lims_site1;lims_site1;"map TBR->1, SAFO->2 (gen site / replace); toute autre valeur -> MANQUANT (silencieux)";YES;Aucune detection de site inconnu
+7;CODES POUR...;EssaiClin;lims_essaiclin;lims_essaiclin;rename direct (valeur copiee telle quelle);YES;
+16;NOMS POUR...;Essai Clinique;lims_essai_clinique;lims_essai_clinique;rename direct (valeur copiee telle quelle);YES;
+17;DéTAILS DU PARTICIPANT...;ID de Participant;lims_id_participant;lims_id_participant;rename direct (valeur copiee telle quelle);YES;Aussi copie dans patid
+25;DéTAILS DU PARTICIPANT...;Âge en Jours;lims_age;lims_age;rename direct (valeur copiee telle quelle) (source = Age en Jours, entier);YES;"v24 Age (=91j) NON utilise; v25 Age en Jours utilise"
+27;DéTAILS DU PARTICIPANT...;Sexe;lims_sexe;lims_sexe;"map M->1, F->2 (gen sex / replace); autre/vide -> MANQUANT (silencieux)";YES;1 enregistrement a Sexe vide dans lextraction courante
+45;Reçu en Lab;Date;lims_date_reu_en_lab;lims_date_reu_en_lab;subinstr mois FR -> date(DMY) -> format %tdCCYY-NN-DD (le fichier de reference affiche DD/MM/YYYY apres re-sauvegarde Excel);YES;v45 = section Recu en Lab / champ Date. v41/v43/v47/v57/v60 aussi Date mais NON utilises (identifies par POSITION)
+46;Reçu en Lab;Heure;lims_heure_reu_en_lab;lims_heure_reu_en_lab;rename direct (valeur copiee telle quelle) (heure texte HH:MM);NO;Renomme en fin: lims_heure_recu -> lims_heure_reu_en_lab
+56;Résultats vérifiés uniquement;InsPar;lims_inspar;lims_inspar;rename direct (valeur copiee telle quelle);NO;Section Resultats verifies uniquement
+64;MDFT-SAL0;Saliva H0;lims_mdft_sal0;lims_mdft_sal0;rename direct (valeur copiee telle quelle);NO;
+65;MDFT-COLDA;COLDA;lims_sal0_colda;lims_sal0_colda;subinstr mois FR -> date(DMY) -> format %tdCCYY-NN-DD (le fichier de reference affiche DD/MM/YYYY apres re-sauvegarde Excel);NO;
+66;MDFT-COLTI;COLTI;lims_sal0_colti;lims_sal0_colti;rename direct (valeur copiee telle quelle);NO;
+67;MDFT-ALIQU;Aliquots;lims_sal0_aliqu;lims_sal0_aliqu;rename direct (valeur copiee telle quelle);NO;
+68;MDFT-SAMCA;SAMCA;lims_sal0_samca;lims_sal0_samca;rename direct (valeur copiee telle quelle);NO;
+69;MDFT-DOSE;D2O Dose;lims_d2o_dose_saliva_h0;lims_d2o_dose_saliva_h0;rename direct (valeur copiee telle quelle);NO;Code MDFT-DOSE / champ D2O Dose
+70;MDFT-SAL3;Saliva H3;lims_mdft_sal3;lims_mdft_sal3;rename direct (valeur copiee telle quelle);NO;
+71;MDFT-COLDA;COLDA;lims_sal3_colda;lims_sal3_colda;subinstr mois FR -> date(DMY) -> format %tdCCYY-NN-DD (le fichier de reference affiche DD/MM/YYYY apres re-sauvegarde Excel);NO;
+72;MDFT-COLTI;COLTI;lims_sal3_colti;lims_sal3_colti;rename direct (valeur copiee telle quelle);NO;
+73;MDFT-ALIQU;Aliquots;lims_sal3_aliqu;lims_sal3_aliqu;rename direct (valeur copiee telle quelle);NO;
+74;MDFT-SAMCB;SAMCB;lims_sal3_samcb;lims_sal3_samcb;rename direct (valeur copiee telle quelle);NO;
+75;MDFT-SAL4;Saliva H4;lims_sal4_sal4;lims_sal4_sal4;rename direct (valeur copiee telle quelle);NO;Code MDFT-SAL4 / champ Saliva H4
+76;MDFT-COLDA;COLDA;lims_sal4_colda;lims_sal4_colda;subinstr mois FR -> date(DMY) -> format %tdCCYY-NN-DD (le fichier de reference affiche DD/MM/YYYY apres re-sauvegarde Excel);NO;
+77;MDFT-COLTI;COLTI;lims_sal4_colti;lims_sal4_colti;rename direct (valeur copiee telle quelle);NO;
+78;MDFT-ALIQU;Aliquots;lims_sal4_aliqu;lims_sal4_aliqu;rename direct (valeur copiee telle quelle);NO;
+79;MDFT-SAMCC;SAMCO;lims_sal4_samcc;lims_sal4_samcc;rename direct (valeur copiee telle quelle);NO;INCOHERENCE: code Excel=MDFT-SAMCC, nom Excel(ligne3)=SAMCO, variable Stata=lims_sal4_samcc
+80;MDFT-SEL;Selles;lims_mdft_sel;lims_mdft_sel;rename direct (valeur copiee telle quelle);NO;Code MDFT-SEL / champ Selles
+81;MDFT-COLSE;CollDate;lims_sel_colse;lims_sel_colse;subinstr mois FR -> date(DMY) -> format %tdCCYY-NN-DD (le fichier de reference affiche DD/MM/YYYY apres re-sauvegarde Excel);NO;INCOHERENCE: code Excel=MDFT-COLSE, nom Excel(ligne3)=CollDate, variable Stata=lims_sel_colse
+82;MDFT-COLTI;COLTI;lims_sel_colti;lims_sel_colti;rename direct (valeur copiee telle quelle);NO;
+83;MDFT-STOTI;STOTI;lims_sel_stoti;lims_sel_stoti;rename direct (valeur copiee telle quelle);NO;
+84;MDFT-ALIQU;Aliquots;lims_sel_aliqu;lims_sel_aliqu;rename direct (valeur copiee telle quelle);NO;
+85;MDFT-SAMCD;SAMCO;lims_sel_samcd;lims_sel_samcd;rename direct (valeur copiee telle quelle);NO;INCOHERENCE: code Excel=MDFT-SAMCD, nom Excel(ligne3)=SAMCO, variable Stata=lims_sel_samcd
+86;MDFT-PL;Plasma;lims_mdft_pl;lims_mdft_pl;rename direct (valeur copiee telle quelle);NO;Code MDFT-PL / champ Plasma
+87;MDFT-COLDA;COLDA;lims_pl_colda;lims_pl_colda;subinstr mois FR -> date(DMY) -> format %tdCCYY-NN-DD (le fichier de reference affiche DD/MM/YYYY apres re-sauvegarde Excel);NO;
+88;MDFT-COLTI;COLTI;lims_pl_colti;lims_pl_colti;rename direct (valeur copiee telle quelle);NO;
+89;MDFT-CENTI;CENTI;lims_pl_centi;lims_pl_centi;rename direct (valeur copiee telle quelle);NO;
+90;MDFT-STOTI;STOTI;lims_pl_stoti;lims_pl_stoti;rename direct (valeur copiee telle quelle);NO;
+91;MDFT-ALIQU;Aliquots;lims_pl_aliqu;lims_pl_aliqu;rename direct (valeur copiee telle quelle);NO;
+92;MDFT-SAMCO;SAMCO;lims_pl_samco;lims_pl_samco;rename direct (valeur copiee telle quelle);NO;Code MDFT-SAMCO, nom SAMCO, variable lims_pl_samco (coherent)

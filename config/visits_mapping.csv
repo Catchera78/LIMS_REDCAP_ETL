@@ -1,0 +1,17 @@
+﻿lims_visit;redcap_event_name
+M3[1];initiation__mois_3_arm_4
+M3 WASHOUT[16];initiation__mois_3_arm_4
+M6[2];suivi__mois_6__sit_arm_4
+M6 WASHOUT[9];suivi__mois_6__sit_arm_4
+M9[3];suivi__mois_9__sit_arm_4
+M9 WASHOUT[13];suivi__mois_9__sit_arm_4
+M12[4];suivi__mois_12__si_arm_4
+M12 WASHOU[10];suivi__mois_12__si_arm_4
+M15[5];suivi__mois_15__si_arm_4
+M15 WASHOU[14];suivi__mois_15__si_arm_4
+M18[6];suivi__mois_18__si_arm_4
+M18 WASHOU[11];suivi__mois_18__si_arm_4
+M21[7];suivi__mois_21__si_arm_4
+M21 WASHOU[15];suivi__mois_21__si_arm_4
+M24[8];suivi__mois_24__si_arm_4
+M24 WASHOU[12];suivi__mois_24__si_arm_4

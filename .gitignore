@@ -1,0 +1,22 @@
+# ==========================================================================
+#  Donnees de travail — NE JAMAIS versionner (donnees patients / essai MDF)
+# ==========================================================================
+input/*
+!input/.gitkeep
+output/*
+!output/.gitkeep
+archive/*
+!archive/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# OS / editeurs
+.DS_Store
+Thumbs.db
+~$*
+*.tmp

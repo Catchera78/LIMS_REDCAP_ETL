@@ -1,0 +1,917 @@
+{
+  "sheet_name": "Résultats des Analyse",
+  "n_columns": 100,
+  "generated_from": "Extrait LIMS 26_08_05.xlsx",
+  "columns": [
+    {
+      "position": 1,
+      "group": "Num de",
+      "field": "Laboratoire",
+      "occurrence": 1,
+      "key": "Num de | Laboratoire | 1",
+      "required": true,
+      "raw_code": "Num de",
+      "raw_name": "Laboratoire"
+    },
+    {
+      "position": 2,
+      "group": "CODES POUR...",
+      "field": "CODES POUR...",
+      "occurrence": 1,
+      "key": "CODES POUR... | CODES POUR... | 1",
+      "required": false,
+      "raw_code": "CODES POUR...",
+      "raw_name": ""
+    },
+    {
+      "position": 5,
+      "group": "CODES POUR...",
+      "field": "Sites",
+      "occurrence": 1,
+      "key": "CODES POUR... | Sites | 1",
+      "required": true,
+      "raw_code": "",
+      "raw_name": "Sites"
+    },
+    {
+      "position": 7,
+      "group": "CODES POUR...",
+      "field": "EssaiClin",
+      "occurrence": 1,
+      "key": "CODES POUR... | EssaiClin | 1",
+      "required": true,
+      "raw_code": "",
+      "raw_name": "EssaiClin"
+    },
+    {
+      "position": 8,
+      "group": "Transfert",
+      "field": "De",
+      "occurrence": 1,
+      "key": "Transfert | De | 1",
+      "required": false,
+      "raw_code": "Transfert",
+      "raw_name": "De"
+    },
+    {
+      "position": 9,
+      "group": "Transfert",
+      "field": "NumLabOrig",
+      "occurrence": 1,
+      "key": "Transfert | NumLabOrig | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "NumLabOrig"
+    },
+    {
+      "position": 10,
+      "group": "NOMS POUR...",
+      "field": "NOMS POUR...",
+      "occurrence": 1,
+      "key": "NOMS POUR... | NOMS POUR... | 1",
+      "required": false,
+      "raw_code": "NOMS POUR...",
+      "raw_name": ""
+    },
+    {
+      "position": 14,
+      "group": "NOMS POUR...",
+      "field": "Site",
+      "occurrence": 1,
+      "key": "NOMS POUR... | Site | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Site"
+    },
+    {
+      "position": 15,
+      "group": "NOMS POUR...",
+      "field": "Enfermaria/Clínica",
+      "occurrence": 1,
+      "key": "NOMS POUR... | Enfermaria/Clínica | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Enfermaria/Clínica"
+    },
+    {
+      "position": 16,
+      "group": "NOMS POUR...",
+      "field": "Essai Clinique",
+      "occurrence": 1,
+      "key": "NOMS POUR... | Essai Clinique | 1",
+      "required": true,
+      "raw_code": "",
+      "raw_name": "Essai Clinique"
+    },
+    {
+      "position": 17,
+      "group": "DéTAILS DU PARTICIPANT...",
+      "field": "ID de Participant",
+      "occurrence": 1,
+      "key": "DéTAILS DU PARTICIPANT... | ID de Participant | 1",
+      "required": true,
+      "raw_code": "DéTAILS DU PARTICIPANT...",
+      "raw_name": "ID de Participant"
+    },
+    {
+      "position": 18,
+      "group": "DéTAILS DU PARTICIPANT...",
+      "field": "Initiales",
+      "occurrence": 1,
+      "key": "DéTAILS DU PARTICIPANT... | Initiales | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Initiales"
+    },
+    {
+      "position": 19,
+      "group": "DéTAILS DU PARTICIPANT...",
+      "field": "N° de Visite",
+      "occurrence": 1,
+      "key": "DéTAILS DU PARTICIPANT... | N° de Visite | 1",
+      "required": true,
+      "raw_code": "",
+      "raw_name": "N° de Visite"
+    },
+    {
+      "position": 21,
+      "group": "DéTAILS DU PARTICIPANT...",
+      "field": "Num Dépistage",
+      "occurrence": 1,
+      "key": "DéTAILS DU PARTICIPANT... | Num Dépistage | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Num Dépistage"
+    },
+    {
+      "position": 23,
+      "group": "DéTAILS DU PARTICIPANT...",
+      "field": "Date",
+      "occurrence": 1,
+      "key": "DéTAILS DU PARTICIPANT... | Date | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Date"
+    },
+    {
+      "position": 24,
+      "group": "DéTAILS DU PARTICIPANT...",
+      "field": "Âge",
+      "occurrence": 1,
+      "key": "DéTAILS DU PARTICIPANT... | Âge | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Âge"
+    },
+    {
+      "position": 25,
+      "group": "DéTAILS DU PARTICIPANT...",
+      "field": "Âge en Jours",
+      "occurrence": 1,
+      "key": "DéTAILS DU PARTICIPANT... | Âge en Jours | 1",
+      "required": true,
+      "raw_code": "",
+      "raw_name": "Âge en Jours"
+    },
+    {
+      "position": 26,
+      "group": "DéTAILS DU PARTICIPANT...",
+      "field": "DDN(Date)",
+      "occurrence": 1,
+      "key": "DéTAILS DU PARTICIPANT... | DDN(Date) | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "DDN(Date)"
+    },
+    {
+      "position": 27,
+      "group": "DéTAILS DU PARTICIPANT...",
+      "field": "Sexe",
+      "occurrence": 1,
+      "key": "DéTAILS DU PARTICIPANT... | Sexe | 1",
+      "required": true,
+      "raw_code": "",
+      "raw_name": "Sexe"
+    },
+    {
+      "position": 28,
+      "group": "DéTAILS DU PARTICIPANT...",
+      "field": "Numéro(s) de Référence",
+      "occurrence": 1,
+      "key": "DéTAILS DU PARTICIPANT... | Numéro(s) de Référence | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Numéro(s) de Référence"
+    },
+    {
+      "position": 29,
+      "group": "DéTAILS DU PARTICIPANT...",
+      "field": "Adresse du Patient",
+      "occurrence": 1,
+      "key": "DéTAILS DU PARTICIPANT... | Adresse du Patient | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Adresse du Patient"
+    },
+    {
+      "position": 30,
+      "group": "DéTAILS DU PARTICIPANT...",
+      "field": "Zone Locale",
+      "occurrence": 1,
+      "key": "DéTAILS DU PARTICIPANT... | Zone Locale | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Zone Locale"
+    },
+    {
+      "position": 31,
+      "group": "DéTAILS DU PARTICIPANT...",
+      "field": "Domaine de la Santé",
+      "occurrence": 1,
+      "key": "DéTAILS DU PARTICIPANT... | Domaine de la Santé | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Domaine de la Santé"
+    },
+    {
+      "position": 32,
+      "group": "DéTAILS DU PARTICIPANT...",
+      "field": "Téléphone Residentiel",
+      "occurrence": 1,
+      "key": "DéTAILS DU PARTICIPANT... | Téléphone Residentiel | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Téléphone Residentiel"
+    },
+    {
+      "position": 33,
+      "group": "DéTAILS DU PARTICIPANT...",
+      "field": "Téléphone de Travail",
+      "occurrence": 1,
+      "key": "DéTAILS DU PARTICIPANT... | Téléphone de Travail | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Téléphone de Travail"
+    },
+    {
+      "position": 34,
+      "group": "DéTAILS DU PARTICIPANT...",
+      "field": "Téléphone Cellulaire",
+      "occurrence": 1,
+      "key": "DéTAILS DU PARTICIPANT... | Téléphone Cellulaire | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Téléphone Cellulaire"
+    },
+    {
+      "position": 35,
+      "group": "DéTAILS DU PARTICIPANT...",
+      "field": "E-mail",
+      "occurrence": 1,
+      "key": "DéTAILS DU PARTICIPANT... | E-mail | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "E-mail"
+    },
+    {
+      "position": 36,
+      "group": "ÉCHANTILLON...",
+      "field": "Type(s)",
+      "occurrence": 1,
+      "key": "ÉCHANTILLON... | Type(s) | 1",
+      "required": false,
+      "raw_code": "ÉCHANTILLON...",
+      "raw_name": "Type(s)"
+    },
+    {
+      "position": 37,
+      "group": "ÉCHANTILLON...",
+      "field": "Temp sur Site",
+      "occurrence": 1,
+      "key": "ÉCHANTILLON... | Temp sur Site | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Temp sur Site"
+    },
+    {
+      "position": 38,
+      "group": "ÉCHANTILLON...",
+      "field": "Temp au Lab",
+      "occurrence": 1,
+      "key": "ÉCHANTILLON... | Temp au Lab | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Temp au Lab"
+    },
+    {
+      "position": 39,
+      "group": "ÉCHANTILLON...",
+      "field": "Réfrigéré",
+      "occurrence": 1,
+      "key": "ÉCHANTILLON... | Réfrigéré | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Réfrigéré"
+    },
+    {
+      "position": 40,
+      "group": "ÉCHANTILLON...",
+      "field": "Emballé Correctement",
+      "occurrence": 1,
+      "key": "ÉCHANTILLON... | Emballé Correctement | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Emballé Correctement"
+    },
+    {
+      "position": 41,
+      "group": "Capture",
+      "field": "Date",
+      "occurrence": 1,
+      "key": "Capture | Date | 1",
+      "required": false,
+      "raw_code": "Capture",
+      "raw_name": "Date"
+    },
+    {
+      "position": 42,
+      "group": "Capture",
+      "field": "Heure",
+      "occurrence": 1,
+      "key": "Capture | Heure | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Heure"
+    },
+    {
+      "position": 43,
+      "group": "Accédé",
+      "field": "Date",
+      "occurrence": 1,
+      "key": "Accédé | Date | 1",
+      "required": false,
+      "raw_code": "Accédé",
+      "raw_name": "Date"
+    },
+    {
+      "position": 44,
+      "group": "Accédé",
+      "field": "Heure:ss",
+      "occurrence": 1,
+      "key": "Accédé | Heure:ss | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Heure:ss"
+    },
+    {
+      "position": 45,
+      "group": "Reçu en Lab",
+      "field": "Date",
+      "occurrence": 1,
+      "key": "Reçu en Lab | Date | 1",
+      "required": true,
+      "raw_code": "Reçu en Lab",
+      "raw_name": "Date"
+    },
+    {
+      "position": 46,
+      "group": "Reçu en Lab",
+      "field": "Heure",
+      "occurrence": 1,
+      "key": "Reçu en Lab | Heure | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Heure"
+    },
+    {
+      "position": 47,
+      "group": "PremImprimé",
+      "field": "Date",
+      "occurrence": 1,
+      "key": "PremImprimé | Date | 1",
+      "required": false,
+      "raw_code": "PremImprimé",
+      "raw_name": "Date"
+    },
+    {
+      "position": 48,
+      "group": "PremImprimé",
+      "field": "Heure",
+      "occurrence": 1,
+      "key": "PremImprimé | Heure | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Heure"
+    },
+    {
+      "position": 49,
+      "group": "PremImprimé",
+      "field": "TypeAccssn",
+      "occurrence": 1,
+      "key": "PremImprimé | TypeAccssn | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "TypeAccssn"
+    },
+    {
+      "position": 50,
+      "group": "CLINIQUE...",
+      "field": "Diagnostic",
+      "occurrence": 1,
+      "key": "CLINIQUE... | Diagnostic | 1",
+      "required": false,
+      "raw_code": "CLINIQUE...",
+      "raw_name": "Diagnostic"
+    },
+    {
+      "position": 51,
+      "group": "CLINIQUE...",
+      "field": "ICD10",
+      "occurrence": 1,
+      "key": "CLINIQUE... | ICD10 | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "ICD10"
+    },
+    {
+      "position": 52,
+      "group": "CLINIQUE...",
+      "field": "Inf/Préc",
+      "occurrence": 1,
+      "key": "CLINIQUE... | Inf/Préc | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Inf/Préc"
+    },
+    {
+      "position": 53,
+      "group": "CLINIQUE...",
+      "field": "Thérapie",
+      "occurrence": 1,
+      "key": "CLINIQUE... | Thérapie | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Thérapie"
+    },
+    {
+      "position": 54,
+      "group": "CLINIQUE...",
+      "field": "Remarques",
+      "occurrence": 1,
+      "key": "CLINIQUE... | Remarques | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Remarques"
+    },
+    {
+      "position": 55,
+      "group": "Résultats vérifiés uniquement",
+      "field": "Examen",
+      "occurrence": 1,
+      "key": "Résultats vérifiés uniquement | Examen | 1",
+      "required": false,
+      "raw_code": "Résultats vérifiés uniquement",
+      "raw_name": "Examen"
+    },
+    {
+      "position": 56,
+      "group": "Résultats vérifiés uniquement",
+      "field": "InsPar",
+      "occurrence": 1,
+      "key": "Résultats vérifiés uniquement | InsPar | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "InsPar"
+    },
+    {
+      "position": 57,
+      "group": "Résultats vérifiés uniquement",
+      "field": "Date",
+      "occurrence": 1,
+      "key": "Résultats vérifiés uniquement | Date | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Date"
+    },
+    {
+      "position": 58,
+      "group": "Résultats vérifiés uniquement",
+      "field": "Heure",
+      "occurrence": 1,
+      "key": "Résultats vérifiés uniquement | Heure | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Heure"
+    },
+    {
+      "position": 59,
+      "group": "Résultats vérifiés uniquement",
+      "field": "Autorisé par",
+      "occurrence": 1,
+      "key": "Résultats vérifiés uniquement | Autorisé par | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Autorisé par"
+    },
+    {
+      "position": 60,
+      "group": "MDFH TEMPS DE COLLECTE...",
+      "field": "Date",
+      "occurrence": 1,
+      "key": "MDFH TEMPS DE COLLECTE... | Date | 1",
+      "required": false,
+      "raw_code": "MDFH TEMPS DE COLLECTE...",
+      "raw_name": "Date"
+    },
+    {
+      "position": 61,
+      "group": "MDFH TEMPS DE COLLECTE...",
+      "field": "Heure",
+      "occurrence": 1,
+      "key": "MDFH TEMPS DE COLLECTE... | Heure | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Heure"
+    },
+    {
+      "position": 62,
+      "group": "MDFH TEMPS DE COLLECTE...",
+      "field": "Machine",
+      "occurrence": 1,
+      "key": "MDFH TEMPS DE COLLECTE... | Machine | 1",
+      "required": false,
+      "raw_code": "",
+      "raw_name": "Machine"
+    },
+    {
+      "position": 64,
+      "group": "MDFT-SAL0",
+      "field": "Saliva H0",
+      "occurrence": 1,
+      "key": "MDFT-SAL0 | Saliva H0 | 1",
+      "required": false,
+      "raw_code": "MDFT-SAL0",
+      "raw_name": "Saliva H0"
+    },
+    {
+      "position": 65,
+      "group": "MDFT-SAL0",
+      "field": "COLDA",
+      "occurrence": 1,
+      "key": "MDFT-SAL0 | COLDA | 1",
+      "required": false,
+      "raw_code": "MDFT-COLDA",
+      "raw_name": "COLDA"
+    },
+    {
+      "position": 66,
+      "group": "MDFT-SAL0",
+      "field": "COLTI",
+      "occurrence": 1,
+      "key": "MDFT-SAL0 | COLTI | 1",
+      "required": false,
+      "raw_code": "MDFT-COLTI",
+      "raw_name": "COLTI"
+    },
+    {
+      "position": 67,
+      "group": "MDFT-SAL0",
+      "field": "Aliquots",
+      "occurrence": 1,
+      "key": "MDFT-SAL0 | Aliquots | 1",
+      "required": false,
+      "raw_code": "MDFT-ALIQU",
+      "raw_name": "Aliquots"
+    },
+    {
+      "position": 68,
+      "group": "MDFT-SAL0",
+      "field": "SAMCA",
+      "occurrence": 1,
+      "key": "MDFT-SAL0 | SAMCA | 1",
+      "required": false,
+      "raw_code": "MDFT-SAMCA",
+      "raw_name": "SAMCA"
+    },
+    {
+      "position": 69,
+      "group": "MDFT-SAL0",
+      "field": "D2O Dose",
+      "occurrence": 1,
+      "key": "MDFT-SAL0 | D2O Dose | 1",
+      "required": false,
+      "raw_code": "MDFT-DOSE",
+      "raw_name": "D2O Dose"
+    },
+    {
+      "position": 70,
+      "group": "MDFT-SAL3",
+      "field": "Saliva H3",
+      "occurrence": 1,
+      "key": "MDFT-SAL3 | Saliva H3 | 1",
+      "required": false,
+      "raw_code": "MDFT-SAL3",
+      "raw_name": "Saliva H3"
+    },
+    {
+      "position": 71,
+      "group": "MDFT-SAL3",
+      "field": "COLDA",
+      "occurrence": 1,
+      "key": "MDFT-SAL3 | COLDA | 1",
+      "required": false,
+      "raw_code": "MDFT-COLDA",
+      "raw_name": "COLDA"
+    },
+    {
+      "position": 72,
+      "group": "MDFT-SAL3",
+      "field": "COLTI",
+      "occurrence": 1,
+      "key": "MDFT-SAL3 | COLTI | 1",
+      "required": false,
+      "raw_code": "MDFT-COLTI",
+      "raw_name": "COLTI"
+    },
+    {
+      "position": 73,
+      "group": "MDFT-SAL3",
+      "field": "Aliquots",
+      "occurrence": 1,
+      "key": "MDFT-SAL3 | Aliquots | 1",
+      "required": false,
+      "raw_code": "MDFT-ALIQU",
+      "raw_name": "Aliquots"
+    },
+    {
+      "position": 74,
+      "group": "MDFT-SAL3",
+      "field": "SAMCB",
+      "occurrence": 1,
+      "key": "MDFT-SAL3 | SAMCB | 1",
+      "required": false,
+      "raw_code": "MDFT-SAMCB",
+      "raw_name": "SAMCB"
+    },
+    {
+      "position": 75,
+      "group": "MDFT-SAL4",
+      "field": "Saliva H4",
+      "occurrence": 1,
+      "key": "MDFT-SAL4 | Saliva H4 | 1",
+      "required": false,
+      "raw_code": "MDFT-SAL4",
+      "raw_name": "Saliva H4"
+    },
+    {
+      "position": 76,
+      "group": "MDFT-SAL4",
+      "field": "COLDA",
+      "occurrence": 1,
+      "key": "MDFT-SAL4 | COLDA | 1",
+      "required": false,
+      "raw_code": "MDFT-COLDA",
+      "raw_name": "COLDA"
+    },
+    {
+      "position": 77,
+      "group": "MDFT-SAL4",
+      "field": "COLTI",
+      "occurrence": 1,
+      "key": "MDFT-SAL4 | COLTI | 1",
+      "required": false,
+      "raw_code": "MDFT-COLTI",
+      "raw_name": "COLTI"
+    },
+    {
+      "position": 78,
+      "group": "MDFT-SAL4",
+      "field": "Aliquots",
+      "occurrence": 1,
+      "key": "MDFT-SAL4 | Aliquots | 1",
+      "required": false,
+      "raw_code": "MDFT-ALIQU",
+      "raw_name": "Aliquots"
+    },
+    {
+      "position": 79,
+      "group": "MDFT-SAL4",
+      "field": "SAMCO",
+      "occurrence": 1,
+      "key": "MDFT-SAL4 | SAMCO | 1",
+      "required": false,
+      "raw_code": "MDFT-SAMCC",
+      "raw_name": "SAMCO"
+    },
+    {
+      "position": 80,
+      "group": "MDFT-SEL",
+      "field": "Selles",
+      "occurrence": 1,
+      "key": "MDFT-SEL | Selles | 1",
+      "required": false,
+      "raw_code": "MDFT-SEL",
+      "raw_name": "Selles"
+    },
+    {
+      "position": 81,
+      "group": "MDFT-SEL",
+      "field": "CollDate",
+      "occurrence": 1,
+      "key": "MDFT-SEL | CollDate | 1",
+      "required": false,
+      "raw_code": "MDFT-COLSE",
+      "raw_name": "CollDate"
+    },
+    {
+      "position": 82,
+      "group": "MDFT-SEL",
+      "field": "COLTI",
+      "occurrence": 1,
+      "key": "MDFT-SEL | COLTI | 1",
+      "required": false,
+      "raw_code": "MDFT-COLTI",
+      "raw_name": "COLTI"
+    },
+    {
+      "position": 83,
+      "group": "MDFT-SEL",
+      "field": "STOTI",
+      "occurrence": 1,
+      "key": "MDFT-SEL | STOTI | 1",
+      "required": false,
+      "raw_code": "MDFT-STOTI",
+      "raw_name": "STOTI"
+    },
+    {
+      "position": 84,
+      "group": "MDFT-SEL",
+      "field": "Aliquots",
+      "occurrence": 1,
+      "key": "MDFT-SEL | Aliquots | 1",
+      "required": false,
+      "raw_code": "MDFT-ALIQU",
+      "raw_name": "Aliquots"
+    },
+    {
+      "position": 85,
+      "group": "MDFT-SEL",
+      "field": "SAMCO",
+      "occurrence": 1,
+      "key": "MDFT-SEL | SAMCO | 1",
+      "required": false,
+      "raw_code": "MDFT-SAMCD",
+      "raw_name": "SAMCO"
+    },
+    {
+      "position": 86,
+      "group": "MDFT-PL",
+      "field": "Plasma",
+      "occurrence": 1,
+      "key": "MDFT-PL | Plasma | 1",
+      "required": false,
+      "raw_code": "MDFT-PL",
+      "raw_name": "Plasma"
+    },
+    {
+      "position": 87,
+      "group": "MDFT-PL",
+      "field": "COLDA",
+      "occurrence": 1,
+      "key": "MDFT-PL | COLDA | 1",
+      "required": false,
+      "raw_code": "MDFT-COLDA",
+      "raw_name": "COLDA"
+    },
+    {
+      "position": 88,
+      "group": "MDFT-PL",
+      "field": "COLTI",
+      "occurrence": 1,
+      "key": "MDFT-PL | COLTI | 1",
+      "required": false,
+      "raw_code": "MDFT-COLTI",
+      "raw_name": "COLTI"
+    },
+    {
+      "position": 89,
+      "group": "MDFT-PL",
+      "field": "CENTI",
+      "occurrence": 1,
+      "key": "MDFT-PL | CENTI | 1",
+      "required": false,
+      "raw_code": "MDFT-CENTI",
+      "raw_name": "CENTI"
+    },
+    {
+      "position": 90,
+      "group": "MDFT-PL",
+      "field": "STOTI",
+      "occurrence": 1,
+      "key": "MDFT-PL | STOTI | 1",
+      "required": false,
+      "raw_code": "MDFT-STOTI",
+      "raw_name": "STOTI"
+    },
+    {
+      "position": 91,
+      "group": "MDFT-PL",
+      "field": "Aliquots",
+      "occurrence": 1,
+      "key": "MDFT-PL | Aliquots | 1",
+      "required": false,
+      "raw_code": "MDFT-ALIQU",
+      "raw_name": "Aliquots"
+    },
+    {
+      "position": 92,
+      "group": "MDFT-PL",
+      "field": "SAMCO",
+      "occurrence": 1,
+      "key": "MDFT-PL | SAMCO | 1",
+      "required": false,
+      "raw_code": "MDFT-SAMCO",
+      "raw_name": "SAMCO"
+    },
+    {
+      "position": 93,
+      "group": "MDFT-AUTR",
+      "field": "Autres",
+      "occurrence": 1,
+      "key": "MDFT-AUTR | Autres | 1",
+      "required": false,
+      "raw_code": "MDFT-AUTR",
+      "raw_name": "Autres"
+    },
+    {
+      "position": 94,
+      "group": "MDFT-SAMP",
+      "field": "Type echnt",
+      "occurrence": 1,
+      "key": "MDFT-SAMP | Type echnt | 1",
+      "required": false,
+      "raw_code": "MDFT-SAMP",
+      "raw_name": "Type echnt"
+    },
+    {
+      "position": 95,
+      "group": "MDFT-SAMP",
+      "field": "COLDA",
+      "occurrence": 1,
+      "key": "MDFT-SAMP | COLDA | 1",
+      "required": false,
+      "raw_code": "MDFT-COLDA",
+      "raw_name": "COLDA"
+    },
+    {
+      "position": 96,
+      "group": "MDFT-SAMP",
+      "field": "COLTI",
+      "occurrence": 1,
+      "key": "MDFT-SAMP | COLTI | 1",
+      "required": false,
+      "raw_code": "MDFT-COLTI",
+      "raw_name": "COLTI"
+    },
+    {
+      "position": 97,
+      "group": "MDFT-SAMP",
+      "field": "CENTI",
+      "occurrence": 1,
+      "key": "MDFT-SAMP | CENTI | 1",
+      "required": false,
+      "raw_code": "MDFT-CENTI",
+      "raw_name": "CENTI"
+    },
+    {
+      "position": 98,
+      "group": "MDFT-SAMP",
+      "field": "STOTI",
+      "occurrence": 1,
+      "key": "MDFT-SAMP | STOTI | 1",
+      "required": false,
+      "raw_code": "MDFT-STOTI",
+      "raw_name": "STOTI"
+    },
+    {
+      "position": 99,
+      "group": "MDFT-SAMP",
+      "field": "Aliquots",
+      "occurrence": 1,
+      "key": "MDFT-SAMP | Aliquots | 1",
+      "required": false,
+      "raw_code": "MDFT-ALIQU",
+      "raw_name": "Aliquots"
+    },
+    {
+      "position": 100,
+      "group": "MDFT-SAMP",
+      "field": "SAMCO",
+      "occurrence": 1,
+      "key": "MDFT-SAMP | SAMCO | 1",
+      "required": false,
+      "raw_code": "MDFT-SAMCD",
+      "raw_name": "SAMCO"
+    }
+  ]
+}

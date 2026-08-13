@@ -1,0 +1,384 @@
+<title>Fiche — Pipeline LIMS → REDCap (MDF)</title>
+<style>
+  :root{
+    --ground:#e9eef1; --paper:#ffffff;
+    --ink:#16242b; --ink-soft:#54666f; --ink-faint:#7d8f97;
+    --line:#d3dde2; --line-soft:#e5ecef;
+    --accent:#0b6b7a; --accent-ink:#095562; --accent-soft:#e0eef0;
+    --ok:#2f8a5b; --ok-soft:#e4f1e9;
+    --warn:#a9740f; --warn-soft:#f6ecd8;
+    --crit:#bd3a2c; --crit-soft:#f7e2df;
+    --shadow:0 1px 2px rgba(16,40,48,.05),0 12px 34px -18px rgba(16,40,48,.28);
+    --mono:"Cascadia Code","Cascadia Mono",Consolas,"SF Mono",Menlo,ui-monospace,monospace;
+    --sans:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  }
+  :root:not([data-theme="light"]){
+    @media (prefers-color-scheme:dark){
+      --ground:#0b1418; --paper:#111d22;
+      --ink:#e7eef1; --ink-soft:#9fb1b9; --ink-faint:#728690;
+      --line:#233238; --line-soft:#1a272c;
+      --accent:#3fb3c4; --accent-ink:#7fd3de; --accent-soft:#122c33;
+      --ok:#4fbd85; --ok-soft:#123026;
+      --warn:#e0a53a; --warn-soft:#33280f;
+      --crit:#e8746a; --crit-soft:#361c19;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 18px 40px -20px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0b1418; --paper:#111d22;
+    --ink:#e7eef1; --ink-soft:#9fb1b9; --ink-faint:#728690;
+    --line:#233238; --line-soft:#1a272c;
+    --accent:#3fb3c4; --accent-ink:#7fd3de; --accent-soft:#122c33;
+    --ok:#4fbd85; --ok-soft:#123026;
+    --warn:#e0a53a; --warn-soft:#33280f;
+    --crit:#e8746a; --crit-soft:#361c19;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 18px 40px -20px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--ground); color:var(--ink);
+    font-family:var(--sans); line-height:1.6;
+    font-size:16px; -webkit-font-smoothing:antialiased;
+  }
+  .sheet{
+    max-width:860px; margin:32px auto; background:var(--paper);
+    border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow);
+    overflow:hidden;
+  }
+  .pad{padding:clamp(22px,4vw,44px)}
+
+  /* ---- header ---- */
+  header.head{
+    padding:clamp(22px,4vw,40px) clamp(22px,4vw,44px) 26px;
+    border-bottom:1px solid var(--line);
+    background:
+      linear-gradient(180deg,var(--accent-soft),transparent 78%);
+  }
+  .eyebrow{
+    font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    font-weight:700; color:var(--accent-ink); margin:0 0 10px;
+  }
+  h1{
+    font-size:clamp(1.7rem,4.2vw,2.35rem); line-height:1.1; margin:0;
+    font-weight:750; letter-spacing:-.02em; text-wrap:balance;
+  }
+  h1 .arrow{color:var(--accent)}
+  .sub{margin:.5rem 0 0; color:var(--ink-soft); font-size:1.02rem; max-width:60ch}
+  .meta{
+    display:flex; flex-wrap:wrap; gap:8px 10px; margin-top:18px; align-items:center;
+  }
+  .tag{
+    font-size:.74rem; font-weight:600; letter-spacing:.02em;
+    padding:4px 10px; border-radius:999px; border:1px solid var(--line);
+    color:var(--ink-soft); background:var(--paper);
+  }
+  .tag.k{border-color:transparent; background:var(--accent-soft); color:var(--accent-ink)}
+  .printbtn{
+    margin-left:auto; font:inherit; font-size:.8rem; font-weight:600;
+    color:var(--paper); background:var(--accent); border:0; cursor:pointer;
+    padding:7px 14px; border-radius:8px; letter-spacing:.01em;
+  }
+  .printbtn:hover{background:var(--accent-ink)}
+  .printbtn:focus-visible{outline:2px solid var(--accent-ink); outline-offset:2px}
+
+  .lead{
+    margin:0; padding:20px clamp(22px,4vw,44px);
+    font-size:1.05rem; color:var(--ink); border-bottom:1px solid var(--line-soft);
+  }
+  .lead b{color:var(--accent-ink)}
+  .callout{
+    margin-top:14px; font-size:.92rem; color:var(--ink-soft);
+    border-left:3px solid var(--warn); background:var(--warn-soft);
+    padding:10px 14px; border-radius:0 8px 8px 0;
+  }
+
+  /* ---- flow ---- */
+  .flow{display:flex; flex-wrap:wrap; align-items:center; gap:8px; margin:4px 0 0}
+  .flow .node{
+    font-size:.82rem; font-weight:600; padding:8px 12px; border-radius:8px;
+    background:var(--accent-soft); color:var(--accent-ink); border:1px solid transparent;
+    font-variant-numeric:tabular-nums;
+  }
+  .flow .node.plain{background:transparent; border-color:var(--line); color:var(--ink-soft); font-weight:500}
+  .flow .sep{color:var(--accent); font-weight:700}
+
+  section{border-top:1px solid var(--line); }
+  h2{
+    display:flex; align-items:baseline; gap:12px;
+    font-size:1.16rem; font-weight:700; margin:0 0 18px; letter-spacing:-.01em;
+  }
+  h2 .n{
+    font-family:var(--mono); font-size:.8rem; font-weight:700; color:var(--accent);
+    background:var(--accent-soft); border-radius:6px; padding:3px 8px; letter-spacing:0;
+  }
+  p{margin:0 0 12px}
+  a{color:var(--accent-ink)}
+
+  /* ---- steps ---- */
+  ol.steps{list-style:none; margin:0; padding:0; display:grid; gap:16px}
+  ol.steps li{display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:start}
+  ol.steps .dot{
+    width:34px; height:34px; border-radius:999px; display:grid; place-items:center;
+    background:var(--accent); color:#fff; font-weight:700; font-family:var(--mono);
+    font-size:.95rem; box-shadow:0 0 0 4px var(--accent-soft);
+  }
+  ol.steps h3{margin:2px 0 3px; font-size:1rem; font-weight:650}
+  ol.steps p{margin:0; color:var(--ink-soft); font-size:.95rem}
+
+  .term{
+    margin-top:20px; background:#0c171b; border:1px solid var(--line);
+    border-radius:10px; overflow:hidden; box-shadow:var(--shadow);
+  }
+  .term .bar{
+    display:flex; gap:6px; padding:9px 12px; background:#0a1317; border-bottom:1px solid #1b2a30;
+  }
+  .term .bar i{width:10px; height:10px; border-radius:999px; background:#33474f}
+  .term pre{
+    margin:0; padding:16px 18px; overflow-x:auto; color:#cfe3e7;
+    font-family:var(--mono); font-size:.82rem; line-height:1.55;
+  }
+  .term .g{color:#5cc39a} .term .a{color:#e2b551} .term .r{color:#e88a7f} .term .d{color:#7d949c}
+
+  /* ---- status cards ---- */
+  .status{display:grid; gap:12px; grid-template-columns:1fr; }
+  @media(min-width:620px){.status{grid-template-columns:1fr 1fr 1fr}}
+  .st{
+    border:1px solid var(--line); border-left-width:5px; border-radius:10px;
+    padding:14px 16px; background:var(--paper);
+  }
+  .st.ok{border-left-color:var(--ok); background:var(--ok-soft)}
+  .st.warn{border-left-color:var(--warn); background:var(--warn-soft)}
+  .st.crit{border-left-color:var(--crit); background:var(--crit-soft)}
+  .st .lbl{font-family:var(--mono); font-weight:700; font-size:.82rem; letter-spacing:.01em}
+  .st.ok .lbl{color:var(--ok)} .st.warn .lbl{color:var(--warn)} .st.crit .lbl{color:var(--crit)}
+  .st p{margin:8px 0 0; font-size:.9rem; color:var(--ink-soft)}
+  .st b{color:var(--ink)}
+
+  /* ---- tables ---- */
+  .tw{overflow-x:auto; border:1px solid var(--line); border-radius:10px}
+  table{border-collapse:collapse; width:100%; font-size:.9rem}
+  th,td{text-align:left; padding:10px 13px; border-bottom:1px solid var(--line-soft); vertical-align:top}
+  thead th{
+    background:var(--accent-soft); color:var(--accent-ink); font-size:.72rem;
+    text-transform:uppercase; letter-spacing:.06em; border-bottom:1px solid var(--line);
+  }
+  tbody tr:last-child td{border-bottom:0}
+  code{
+    font-family:var(--mono); font-size:.85em; background:var(--line-soft);
+    padding:1px 6px; border-radius:5px; color:var(--accent-ink); white-space:nowrap;
+  }
+  .sev{font-family:var(--mono); font-weight:700; font-size:.78rem; white-space:nowrap}
+  .sev.b{color:var(--crit)} .sev.w{color:var(--warn)}
+
+  /* ---- checklist ---- */
+  ul.check{list-style:none; margin:0; padding:0; display:grid; gap:9px}
+  ul.check li{display:grid; grid-template-columns:auto 1fr; gap:11px; align-items:start; font-size:.94rem}
+  ul.check .box{
+    width:18px; height:18px; margin-top:2px; border:2px solid var(--accent);
+    border-radius:5px; flex:none;
+  }
+  .files{display:grid; gap:10px}
+  .frow{display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:baseline;
+    padding:11px 14px; border:1px solid var(--line); border-radius:9px; background:var(--paper)}
+  .frow code{white-space:normal}
+  .frow span{color:var(--ink-soft); font-size:.9rem}
+
+  footer{
+    border-top:1px solid var(--line); padding:22px clamp(22px,4vw,44px) 30px;
+    color:var(--ink-faint); font-size:.84rem; background:var(--accent-soft);
+  }
+  footer .refs{display:flex; flex-wrap:wrap; gap:6px 14px; margin:6px 0 14px}
+  footer code{background:transparent; padding:0; color:var(--ink-soft)}
+
+  /* ---- print (A4, noir sur blanc) ---- */
+  @media print{
+    :root{
+      --ground:#fff; --paper:#fff; --ink:#111; --ink-soft:#333; --ink-faint:#555;
+      --line:#bbb; --line-soft:#ddd; --accent:#0b6b7a; --accent-ink:#084d58;
+      --accent-soft:#eef4f5; --ok-soft:#eef6f1; --warn-soft:#f7f0e2; --crit-soft:#f8ece9;
+      --shadow:none;
+    }
+    body{background:#fff; font-size:11.5pt}
+    .sheet{margin:0; border:0; border-radius:0; box-shadow:none; max-width:none}
+    .printbtn,.themehint{display:none !important}
+    .term{background:#f4f7f8; border-color:#ccc}
+    .term .bar{background:#eaf0f1} .term .bar i{background:#c3ced2}
+    .term pre{color:#123} .term .g{color:#1f7a52} .term .a{color:#8a6100} .term .r{color:#a53225} .term .d{color:#556}
+    section,.st,.frow,tr,ol.steps li,ul.check li{break-inside:avoid}
+    h2{break-after:avoid}
+    a{color:inherit; text-decoration:none}
+    @page{margin:14mm}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="sheet">
+  <header class="head">
+    <p class="eyebrow">Épicentre · MSF — Essai MDF · Data Management</p>
+    <h1>Pipeline LIMS <span class="arrow">→</span> REDCap</h1>
+    <p class="sub">Fiche d'explication et d'exécution pas à pas — de l'extraction Excel du LIMS au fichier prêt pour l'import REDCap.</p>
+    <div class="meta">
+      <span class="tag k">Version 1.0</span>
+      <span class="tag">Public : Data Manager &amp; équipe labo</span>
+      <span class="tag">Poste Windows</span>
+      <button class="printbtn" onclick="window.print()">Imprimer / PDF</button>
+    </div>
+  </header>
+
+  <p class="lead">
+    Le pipeline transforme <b>automatiquement</b> une extraction Excel du LIMS en fichier compatible
+    REDCap, avec un rapport qualité. Il remplace le nettoyage manuel + do-file Stata.
+    <span class="callout"><b>Il n'importe pas dans REDCap.</b> Un contrôle humain reste obligatoire avant l'import.</span>
+  </p>
+
+  <section class="pad">
+    <h2><span class="n">Flux</span> Le principe</h2>
+    <div class="flow">
+      <span class="node">Excel LIMS</span><span class="sep">→</span>
+      <span class="node">ETL automatique</span><span class="sep">→</span>
+      <span class="node">Contrôles QC</span><span class="sep">→</span>
+      <span class="node">Ready_Data + rapport QC</span><span class="sep">→</span>
+      <span class="node plain">Validation humaine</span><span class="sep">→</span>
+      <span class="node plain">Import REDCap</span>
+    </div>
+  </section>
+
+  <section class="pad">
+    <h2><span class="n">1</span> Exécuter — en 3 gestes</h2>
+    <ol class="steps">
+      <li>
+        <div class="dot">1</div>
+        <div>
+          <h3>Déposer l'extraction</h3>
+          <p>Exporter l'onglet <code>Résultats des Analyse</code> en <code>.xlsx</code> et le placer — <b>un seul fichier</b> — dans le dossier <code>input/</code>. Aucun nettoyage manuel (en-têtes, légendes) n'est nécessaire.</p>
+        </div>
+      </li>
+      <li>
+        <div class="dot">2</div>
+        <div>
+          <h3>Lancer</h3>
+          <p>Double-cliquer sur <code>RUN_LIMS_REDCAP.bat</code>. Une fenêtre s'ouvre et <b>reste ouverte</b> à la fin.</p>
+        </div>
+      </li>
+      <li>
+        <div class="dot">3</div>
+        <div>
+          <h3>Lire le tableau de bord, puis le rapport QC</h3>
+          <p>Vérifier le <b>STATUS</b> (ci-dessous), puis ouvrir <code>output/QC_Report_&lt;date&gt;.xlsx</code> avant tout import.</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="term" role="img" aria-label="Exemple de tableau de bord">
+      <div class="bar"><i></i><i></i><i></i></div>
+<pre>==========================================
+         LIMS -&gt; REDCap MDF
+==========================================
+
+Input:
+Extrait LIMS 26_08_13.xlsx
+
+Structure............... <span class="g">OK</span>
+Mapping................. <span class="g">OK</span>
+Transformation.......... <span class="g">OK</span>
+QC...................... <span class="a">WARNING</span>
+
+Records source.......... 947
+Records output.......... 947
+Errors.................. 0
+Warnings................ 81
+
+STATUS:
+<span class="a">READY_WITH_WARNINGS</span>
+
+Output:  <span class="d">output/Ready_Data_26_08_13.csv</span>
+QC:      <span class="d">output/QC_Report_26_08_13.xlsx</span></pre>
+    </div>
+  </section>
+
+  <section class="pad">
+    <h2><span class="n">2</span> Les trois statuts</h2>
+    <div class="status">
+      <div class="st ok">
+        <div class="lbl">READY</div>
+        <p>0 erreur, 0 avertissement. <b>Ready_Data</b> produit. Vérifier le QC puis importer.</p>
+      </div>
+      <div class="st warn">
+        <div class="lbl">READY_WITH_WARNINGS</div>
+        <p>Pas d'erreur bloquante, mais des avertissements. <b>Ready_Data</b> produit — <b>examiner les avertissements</b> avant d'importer.</p>
+      </div>
+      <div class="st crit">
+        <div class="lbl">NOT_READY</div>
+        <p>≥ 1 erreur bloquante. Fichier nommé <b>NOT_READY_Data</b> (jamais <code>Ready_Data</code>). Corriger, puis relancer.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pad">
+    <h2><span class="n">3</span> Fichiers produits</h2>
+    <div class="files">
+      <div class="frow"><code>output/Ready_Data_&lt;date&gt;.csv</code><span>Le fichier à importer dans REDCap — 45 colonnes, UTF-8, séparateur <code>;</code>.</span></div>
+      <div class="frow"><code>output/QC_Report_&lt;date&gt;.xlsx</code><span>Rapport qualité, 8 feuilles : SUMMARY · SCHEMA · ERRORS · WARNINGS · UNKNOWN_VISITS · UNKNOWN_COLUMNS · DUPLICATES · MAPPING.</span></div>
+      <div class="frow"><code>archive/&lt;date&gt;/</code><span>Copies horodatées : <code>raw/</code> (original, jamais modifié) · <code>output/</code> · <code>qc/</code> · <code>logs/</code>.</span></div>
+    </div>
+  </section>
+
+  <section class="pad">
+    <h2><span class="n">4</span> Codes &amp; que faire</h2>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Code</th><th>Gravité</th><th>Signification</th><th>Que faire</th></tr></thead>
+        <tbody>
+          <tr><td><code>ERROR_UNKNOWN_VISIT</code></td><td class="sev b">Bloquant</td><td>« N° de Visite » absente du mapping</td><td>Vérifier ; compléter <code>visits_mapping.csv</code> si légitime</td></tr>
+          <tr><td><code>ERROR_UNKNOWN_SITE</code></td><td class="sev b">Bloquant</td><td>Site ≠ TBR/SAFO</td><td>Vérifier ; compléter <code>sites_mapping.csv</code></td></tr>
+          <tr><td><code>ERROR_INVALID_DATE</code></td><td class="sev b">Bloquant</td><td>Date non interprétable</td><td>Corriger la date dans le LIMS (voir <code>source_row</code>)</td></tr>
+          <tr><td><code>ERROR_INVALID_TIME</code></td><td class="sev w">Avert.</td><td>Heure non interprétable</td><td>Vérifier l'heure dans le LIMS</td></tr>
+          <tr><td><code>WARNING_UNKNOWN_SEX</code></td><td class="sev w">Avert.</td><td>Sexe ≠ M/F (non vide)</td><td>Vérifier ; compléter <code>sex_mapping.csv</code></td></tr>
+          <tr><td><code>WARNING_MULTIPLE_RECORDS_SAME_EVENT</code></td><td class="sev w">Avert.</td><td>Plusieurs prélèvements pour un même participant/événement</td><td>Confirmer une vraie répétition (rattrapage), pas un doublon</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:12px;color:var(--ink-soft);font-size:.9rem">Une valeur source <b>vide</b> reste vide sans erreur ; seule une valeur <b>non vide non reconnue</b> est signalée. Chaque ligne du QC indique <code>source_row</code>, <code>patid</code> et <code>source_value</code>.</p>
+  </section>
+
+  <section class="pad">
+    <h2><span class="n">5</span> Dépannage express</h2>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Situation</th><th>Solution</th></tr></thead>
+        <tbody>
+          <tr><td>« Aucun fichier .xlsx dans input »</td><td>Déposer l'extraction dans <code>input/</code></td></tr>
+          <tr><td>« Plusieurs fichiers .xlsx »</td><td>N'en laisser qu'<b>un</b></td></tr>
+          <tr><td>Structure <b>FAIL</b></td><td>Colonne obligatoire absente (ex. <code>ID de Participant</code>) — vérifier l'export LIMS</td></tr>
+          <tr><td>Structure <b>WARNING</b></td><td>Colonne déplacée / nouvelle — non bloquant, voir <code>SCHEMA</code></td></tr>
+          <tr><td>Note « openpyxl absent »</td><td>Non bloquant — <code>pip install -r requirements.txt</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:12px;color:var(--ink-soft);font-size:.9rem">Les règles métier sont éditables au tableur dans <code>config/*.csv</code> — sans toucher au code. Journal détaillé : <code>archive/&lt;date&gt;/logs/run_&lt;date&gt;.log</code>.</p>
+  </section>
+
+  <section class="pad">
+    <h2><span class="n">6</span> Avant d'importer dans REDCap</h2>
+    <ul class="check">
+      <li><span class="box"></span><span>Statut <b>READY</b> ou <b>READY_WITH_WARNINGS</b> (jamais un <code>NOT_READY_Data</code>).</span></li>
+      <li><span class="box"></span><span>Feuille <b>ERRORS</b> du QC vide.</span></li>
+      <li><span class="box"></span><span>Feuilles <b>WARNINGS</b> / <b>DUPLICATES</b> revues : répétitions légitimes.</span></li>
+      <li><span class="box"></span><span>Feuille <b>UNKNOWN_VISITS</b> vide (sinon compléter le mapping).</span></li>
+      <li><span class="box"></span><span>Nombre de <b>Records output</b> cohérent avec l'attendu.</span></li>
+      <li><span class="box"></span><span>Fichier LIMS original bien archivé (<code>archive/&lt;date&gt;/raw/</code>).</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="refs">
+      <code>docs/GUIDE_UTILISATION.md</code>
+      <code>docs/V1_RELEASE_REVIEW.md</code>
+      <code>docs/REGRESSION_ANALYSIS.md</code>
+      <code>docs/CURRENT_PIPELINE_AUDIT.md</code>
+      <code>README.md</code>
+    </div>
+    Pipeline LIMS → REDCap · MDF Trial — v1.0. Le contrôle humain avant l'import REDCap reste obligatoire.
+  </footer>
+</div>

@@ -1,0 +1,41 @@
+﻿source_group;source_field;source_occurrence;redcap_variable;required;data_type;active;notes
+;Laboratoire;1;lims_laboratoire;YES;text;YES;
+;Sites;1;lims_site1;YES;categorical;YES;recode via sites_mapping.csv (TBR=1, SAFO=2)
+;EssaiClin;1;lims_essaiclin;YES;text;YES;
+;Essai Clinique;1;lims_essai_clinique;YES;text;YES;
+;ID de Participant;1;lims_id_participant;YES;text;YES;sert aussi a generer patid
+;N° de Visite;1;redcap_event_name;YES;event;YES;"determine via visits_mapping.csv ; visite inconnue -> ERROR_UNKNOWN_VISIT"
+;Âge en Jours;1;lims_age;YES;integer;YES;source = Age en Jours (v25), pas Age (v24)
+;Sexe;1;lims_sexe;YES;categorical;YES;recode via sex_mapping.csv (M=1, F=2)
+Reçu en Lab;Date;1;lims_date_reu_en_lab;YES;date;YES;section Recu en Lab / champ Date (v45)
+Reçu en Lab;Heure;1;lims_heure_reu_en_lab;NO;time;YES;
+;InsPar;1;lims_inspar;NO;text;YES;
+MDFT-SAL0;Saliva H0;1;lims_mdft_sal0;NO;text;YES;
+MDFT-SAL0;COLDA;1;lims_sal0_colda;NO;date;YES;
+MDFT-SAL0;COLTI;1;lims_sal0_colti;NO;time;YES;
+MDFT-SAL0;Aliquots;1;lims_sal0_aliqu;NO;integer;YES;
+MDFT-SAL0;SAMCA;1;lims_sal0_samca;NO;text;YES;
+MDFT-SAL0;D2O Dose;1;lims_d2o_dose_saliva_h0;NO;text;YES;
+MDFT-SAL3;Saliva H3;1;lims_mdft_sal3;NO;text;YES;
+MDFT-SAL3;COLDA;1;lims_sal3_colda;NO;date;YES;
+MDFT-SAL3;COLTI;1;lims_sal3_colti;NO;time;YES;
+MDFT-SAL3;Aliquots;1;lims_sal3_aliqu;NO;integer;YES;
+MDFT-SAL3;SAMCB;1;lims_sal3_samcb;NO;text;YES;
+MDFT-SAL4;Saliva H4;1;lims_sal4_sal4;NO;text;YES;
+MDFT-SAL4;COLDA;1;lims_sal4_colda;NO;date;YES;
+MDFT-SAL4;COLTI;1;lims_sal4_colti;NO;time;YES;
+MDFT-SAL4;Aliquots;1;lims_sal4_aliqu;NO;integer;YES;
+MDFT-SAL4;SAMCO;1;lims_sal4_samcc;NO;text;YES;"INCOHERENCE historique: colonne SAMCO (code MDFT-SAMCC) -> variable lims_sal4_samcc ; a arbitrer via Golden Dataset"
+MDFT-SEL;Selles;1;lims_mdft_sel;NO;text;YES;
+MDFT-SEL;CollDate;1;lims_sel_colse;NO;date;YES;nom LIMS = CollDate (code MDFT-COLSE)
+MDFT-SEL;COLTI;1;lims_sel_colti;NO;time;YES;
+MDFT-SEL;STOTI;1;lims_sel_stoti;NO;time;YES;
+MDFT-SEL;Aliquots;1;lims_sel_aliqu;NO;integer;YES;
+MDFT-SEL;SAMCO;1;lims_sel_samcd;NO;text;YES;"INCOHERENCE historique: colonne SAMCO (code MDFT-SAMCD) -> variable lims_sel_samcd ; a arbitrer via Golden Dataset"
+MDFT-PL;Plasma;1;lims_mdft_pl;NO;text;YES;
+MDFT-PL;COLDA;1;lims_pl_colda;NO;date;YES;
+MDFT-PL;COLTI;1;lims_pl_colti;NO;time;YES;
+MDFT-PL;CENTI;1;lims_pl_centi;NO;time;YES;
+MDFT-PL;STOTI;1;lims_pl_stoti;NO;time;YES;
+MDFT-PL;Aliquots;1;lims_pl_aliqu;NO;integer;YES;
+MDFT-PL;SAMCO;1;lims_pl_samco;NO;text;YES;
