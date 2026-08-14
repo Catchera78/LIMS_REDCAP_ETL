@@ -9,7 +9,7 @@ humaine avant import.
 > `.gitignore` et tout identifiant participant/accession présent dans les
 > exemples, tests et documents est **synthétique** (`PT-0001…`, `ACC-0001…`).
 
-> **État : V1.0 complète (Prompts 1–13).**
+> **État : V1.0 complète .**
 > Chaîne complète : lecture → structure → identité des colonnes → Schema Guard →
 > mapping externalisé → transformations → dates & heures →
 > `redcap_repeat_instance` → export `Ready_Data` → rapport QC → archivage +
@@ -19,7 +19,7 @@ humaine avant import.
 > [`docs/V1_RELEASE_REVIEW.md`](docs/V1_RELEASE_REVIEW.md) — points à valider par
 > le Data Manager). **107 tests, tous verts.**
 
-## Identité des colonnes (Prompt 2)
+## Identité des colonnes ( 2)
 
 Une colonne n'est **jamais** identifiée par sa position. `column_identity.py`
 reconstruit une clé stable à partir des deux lignes d'en-tête :
@@ -37,7 +37,7 @@ change pas son identité**. Les valeurs brutes (`raw_code`, `raw_name`) sont
 conservées pour tracer les incohérences connues (ex. code `MDFT-SAMCC` /
 nom `SAMCO` en position 79) — sans correction à ce stade.
 
-## Schema Guard (Prompt 3)
+## Schema Guard ( 3)
 
 `schema_guard.py` compare la structure de chaque extraction à
 `config/reference_schema.json` (91 colonnes nommées, dont **9 obligatoires**) et
@@ -61,7 +61,7 @@ structure) :
 python build_reference_schema.py "chemin/vers/Extrait LIMS.xlsx"
 ```
 
-## Mapping externalisé (Prompt 4)
+## Mapping externalisé ( 4)
 
 Toutes les règles métier vivent dans `config/*.csv` — **modifiables par le Data
 Manager sans toucher au code**. Le code ne contient plus aucune référence à une
@@ -90,7 +90,7 @@ historique) et annotées dans `notes` — à arbitrer via le Golden Dataset.
 libellé de bannière LIMS. `Date`/`Heure` et les blocs MDFT gardent leur groupe
 (noms répétés à désambiguïser).
 
-## Transformations métier (Prompt 5)
+## Transformations métier ( 5)
 
 `transformer.py` reproduit le do-file Stata (réglages dans `config.transform`) :
 
@@ -106,9 +106,9 @@ suppression manuelle. Règle de valeur manquante alignée sur Stata : une valeur
 source **vide** reste vide **sans** erreur ; une valeur **non vide non reconnue**
 déclenche le code configuré (site → ERROR, sexe → WARNING).
 
-Non encore reproduit ici : `redcap_repeat_instance` (vide, Prompt 7).
+Non encore reproduit ici : `redcap_repeat_instance` (vide,  7).
 
-## Dates & heures (Prompt 6)
+## Dates & heures ( 6)
 
 `date_parser.py` remplace les dizaines de substitutions de mois du do-file par
 **une** fonction testée. En lisant l'Excel **directement**, les dates sont des
@@ -129,7 +129,7 @@ Vérifié sur l'extraction réelle : `02-Mai-2024 → 02/05/2024`,
 `0.65069 → 15:37`, `0.43055 → 10:20` — valeurs identiques à celles produites par
 l'ancien `source.csv`.
 
-## redcap_repeat_instance (Prompt 7)
+## redcap_repeat_instance ( 7)
 
 `repeat_instance.py` reproduit `bys patid redcap_event_name
 (lims_date_reu_en_lab): gen = _n` :
@@ -144,7 +144,7 @@ l'ordre d'apparition (déterministe, là où Stata est arbitraire). Un groupe de
 plusieurs lignes pour un même `(patid, event)` produit
 **`WARNING_MULTIPLE_RECORDS_SAME_EVENT`** (81 sur l'extraction de test).
 
-## Export Ready_Data (Prompt 8)
+## Export Ready_Data ( 8)
 
 `redcap_exporter.py` écrit un CSV **au format exact** de la référence :
 séparateur `;`, **UTF-8 avec BOM**, fins de ligne **CRLF**, noms REDCap exacts,
@@ -161,7 +161,7 @@ interne**. Vérifié : l'en-tête produit est identique à celui de
 `Ready_Data`, pour éviter tout import REDCap accidentel). La date est le jeton
 `AA_MM_JJ` extrait du nom de l'extraction.
 
-## Rapport QC (Prompt 9)
+## Rapport QC ( 9)
 
 `qc_reporter.py` produit `QC_Report_<date>.xlsx` (écrit via `xlsx_writer`,
 openpyxl ou repli stdlib) avec **8 feuilles** :
@@ -181,7 +181,7 @@ openpyxl ou repli stdlib) avec **8 feuilles** :
 `NOT_READY`, aucun fichier `Ready_Data` n'est produit — seulement
 `NOT_READY_Data_<date>.csv`.
 
-## Non-régression vs Golden Stata (Prompt 10)
+## Non-régression vs Golden Stata ( 10)
 
 ```bash
 python tests/regression/compare_with_stata.py
@@ -199,7 +199,7 @@ hérités que le nouvel ETL corrige** : 1 enregistrement (`ACC-0001`) que Stata
 supprimait à tort, et 3 valeurs à l'encodage corrompu dans le Golden. Analyse
 détaillée : [`docs/REGRESSION_ANALYSIS.md`](docs/REGRESSION_ANALYSIS.md).
 
-## Tests de changement de structure (Prompt 11)
+## Tests de changement de structure ( 11)
 
 `tests/test_structural_changes.py` génère des `.xlsx` synthétiques (structure
 volontairement cassée) et vérifie le comportement — résultats dans
@@ -289,7 +289,7 @@ python run_pipeline.py --input input --config config/pipeline.json
 ```
 LIMS_REDCAP_ETL/
 ├── input/                 extraction LIMS .xlsx à traiter
-├── output/                fichiers produits (Ready_Data / QC) — Prompts 8-9
+├── output/                fichiers produits (Ready_Data / QC) — s 8-9
 ├── archive/               copies horodatées : <date>/{raw,output,qc,logs}
 ├── config/
 │   ├── pipeline.json           onglet, ancres, sections, archivage, schema, mapping
@@ -313,7 +313,7 @@ LIMS_REDCAP_ETL/
 │   ├── qc_reporter.py      rapport QC 8 feuilles + statut global
 │   ├── xlsx_writer.py      écriture .xlsx (openpyxl ou repli stdlib)
 │   ├── etl.py              cœur réutilisable du pipeline (run_etl)
-│   ├── dashboard.py        tableau de bord console (Prompt 12)
+│   ├── dashboard.py        tableau de bord console ( 12)
 │   ├── archiver.py         archivage non destructif du fichier original
 │   ├── logging_setup.py    journal console (UTF-8) + fichier
 │   └── text_utils.py       normalisation / conversion de cellules
@@ -376,13 +376,13 @@ ignoré proprement.
 - Détection automatique de la structure ; rien produit silencieusement.
 - Fichier LIMS original **toujours** conservé intact et archivé.
 - Chemins **relatifs** ; aucune donnée métier codée en dur (tout en `config/`).
-- Mappings modifiables par le Data Manager **sans toucher au code** (Prompt 4).
+- Mappings modifiables par le Data Manager **sans toucher au code** ( 4).
 
 ---
 
 ## Feuille de route
 
-| Prompt | Contenu |
+|  | Contenu |
 |---|---|
 | ~~2~~ | ~~Parser d'identité des colonnes (groupe + champ + occurrence).~~ ✅ fait |
 | ~~3~~ | ~~Schema Guard (`reference_schema.json`) : PASS / PASS_WITH_WARNINGS / FAIL.~~ ✅ fait |
